@@ -1,3 +1,1 @@
-import { AppComponent } from './app/app.component';
-
-new AppComponent();
+import './styles/index.scss';

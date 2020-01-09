@@ -6,7 +6,7 @@ Execute:
 
 ```bash
 npm install
-npm build
+npm run build
 ```
 
 Open 2 consoles. In one execute `npm run start:build`. In the other `npm run start:server`.
@@ -29,7 +29,7 @@ npm test
 ## 3. Build
 
 ```bash
-npm build
+npm run build
 ```
 
 The artifacts will be generated under `/dist` folder.

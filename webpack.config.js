@@ -6,21 +6,6 @@ const {
   CleanWebpackPlugin
 } = require('clean-webpack-plugin');
 
-const isDevEnvironment = () => process.env.NODE_ENV === 'development';
-
-const plugins = [
-  new CleanWebpackPlugin(),
-  new HtmlWebPackPlugin({
-    inject: true,
-    template: path.resolve(__dirname, 'src/index.html')
-  }),
-  new MiniCssExtractPlugin({
-    filename: '[name].css',
-    chunkFilename: '[id].css',
-  }),
-  new webpack.HotModuleReplacementPlugin()
-];
-
 module.exports = {
   mode: 'development',
   entry: [path.resolve(__dirname, 'src/index.ts')],
@@ -29,7 +14,7 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
   },
   resolve: {
-    extensions: ['.js', '.ts']
+    extensions: ['.js', '.ts', 'scss']
   },
   devServer: {
     hot: true,
@@ -43,25 +28,40 @@ module.exports = {
       template: path.resolve(__dirname, 'src/index.html')
     }),
     new MiniCssExtractPlugin({
-      filename: '[name].css',
+      filename: 'styles.css',
       chunkFilename: '[id].css',
     }),
     new webpack.HotModuleReplacementPlugin()
   ],
   module: {
     rules: [{
-      test: /\.ts$/,
-      use: 'ts-loader',
-      exclude: /node_modules/
-    }, {
-      test: /\.scss$/,
-      use: [{
-        loader: MiniCssExtractPlugin.loader,
-        options: {
-          esModule: true,
-          hmr: isDevEnvironment(),
-        },
-      }, 'sass-loader'],
-    }]
+        test: /\.ts$/,
+        use: 'ts-loader',
+        exclude: /node_modules/
+      },
+      /*{
+           test: /\.scss$/,
+           use: [{
+             loader: MiniCssExtractPlugin.loader,
+             options: {
+               esModule: true,
+               hmr: isDevEnvironment(),
+             },
+           }, 'sass-loader'],
+         }*/
+      {
+        test: /\.s(a|c)ss$/,
+        loader: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: true
+            }
+          }
+        ]
+      }
+    ]
   }
 };
