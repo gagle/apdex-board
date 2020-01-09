@@ -1,5 +1,17 @@
 # Apdex score board
 
+## 0. TLDR
+
+Execute:
+
+```bash
+npm install
+npm build
+```
+
+Open 2 consoles. In one execute `npm run start:build`. In the other `npm run start:server`.
+Open the browser and open url `http://localhost/3000`.
+
 ## 1. Install dev dependencies
 
 Only dev dependencies will be installed. No runtime dependencies have been used.
@@ -20,11 +32,16 @@ npm test
 npm build
 ```
 
-The artifacts will be generated under `/dist` folder. To open the webapp and host the generated files in a local web server for testing purposes, run: `npm run start:build`. Open the browser and go to `localhost:4000`.
+The artifacts will be generated under `/dist` folder.
+
+## 4. Run
+
+- To open the webapp and host the generated files in a local web server for testing purposes, run: `npm run start:build`. Open the browser and go to `localhost:4000`.
+- To serve the json data, run the command `npm run start:server`. This will start a Hapijs server. `GET /` will return the data.
 
 ## 4. Local development
 
-Start listening on a dev server on `localhost:3000` by running:
+Start listening on a file hosting server on `localhost:3000` by running:
 
 ```bash
 npm start
