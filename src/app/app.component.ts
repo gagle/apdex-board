@@ -7,8 +7,6 @@ import { Component, ShadowDOMComponent } from '@core/shadow-dom';
 })
 export class AppComponent extends ShadowDOMComponent {
   onRender(): string {
-    return `
-      <app-host-list></app-host-list>
-    `;
+    return '<app-board></app-board>';
   }
 }

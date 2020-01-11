@@ -1,0 +1,25 @@
+@import '../../../../styles/abstracts/variables';
+
+:host {
+  display: flex;
+  align-items: baseline;
+}
+
+.title {
+  font-size: 35px;
+  font-weight: $fw-bold;
+  line-height: 43px;
+}
+
+.subtitle {
+  font-size: $fs-big;
+  line-height: 22px;
+}
+
+.title-wrapper {
+  margin-right: 30px;
+}
+
+app-theme-switcher {
+  margin-left: auto;
+}

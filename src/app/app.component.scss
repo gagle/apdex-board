@@ -1,9 +1,9 @@
-@import '../styles/abstracts/variables/colors';
+@import '../styles/abstracts/variables';
 
 :host {
   display: flex;
   height: 100%;
   width: 100%;
   background-color: $color-wild-sand;
-  padding: 30px;
+  justify-content: center;
 }

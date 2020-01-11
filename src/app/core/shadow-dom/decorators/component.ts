@@ -11,7 +11,7 @@ export function Component(options: ComponentOptions) {
     target: T
   ): Constructor {
     const Class = class extends target {
-      withStyles(): string {
+      get styles(): string {
         return options.styles || '';
       }
     };

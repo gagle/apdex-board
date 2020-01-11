@@ -55,18 +55,7 @@ module.exports = {
             }
           },
           'css-loader',
-          {
-            loader: 'sass-loader',
-            options: {
-              sourceMap: true,
-              sassOptions: {
-                includePaths: [
-                  path.resolve(__dirname, 'node_modules'),
-                  path.resolve(__dirname, 'src/styles/abstracts')
-                ]
-              }
-            }
-          }
+          'sass-loader'
         ]
       }
     ]

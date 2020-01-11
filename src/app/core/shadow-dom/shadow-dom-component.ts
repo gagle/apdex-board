@@ -7,15 +7,13 @@ export abstract class ShadowDOMComponent extends HTMLElement {
 
     this.defaultStyleElement = document.createElement('style');
     // By default, custom elements have 'display: inline'
-    this.defaultStyleElement.innerHTML = ':host { display: block; }';
+    this.defaultStyleElement.innerHTML = ':host { display: block; contain: content; }';
 
     this.attachShadow({ mode: 'open' });
 
-    const styles = this.withStyles();
-
-    if (styles) {
+    if (this.styles) {
       this.customStyleElement = document.createElement('style');
-      this.customStyleElement.innerHTML = styles;
+      this.customStyleElement.innerHTML = this.styles;
     }
 
     setTimeout(() => {
@@ -25,7 +23,7 @@ export abstract class ShadowDOMComponent extends HTMLElement {
     }, 0);
   }
 
-  withStyles(): string {
+  get styles(): string {
     return '';
   }
 
