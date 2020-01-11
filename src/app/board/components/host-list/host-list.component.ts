@@ -20,8 +20,6 @@ export class HostListComponent extends ShadowDOMComponent {
     return this.hosts.reduce(
       (str, host) => `
       ${str}<app-host host="${host}"></app-host>
-    `,
-      ''
-    );
+    `, '');
   }
 }

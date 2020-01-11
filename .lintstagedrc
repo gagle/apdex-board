@@ -1,12 +1,10 @@
 {
   "src/**/*.ts": [
     "eslint --fix",
-    "prettier --parser typescript",
     "git add"
   ],
   "src/**/*.scss": [
     "stylelint --syntax scss",
-    "prettier",
     "git add"
   ]
 }
