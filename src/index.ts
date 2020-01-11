@@ -1,1 +1,3 @@
-import './styles/index.scss';
+import './styles';
+
+import './app/app.component';

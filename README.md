@@ -1,6 +1,6 @@
 # Apdex score board
 
-## 0. TLDR
+## 0. Quick build & run
 
 Execute:
 
@@ -56,3 +56,7 @@ npm start
 - Linting with `eslint` (new recommended way for linting TS files since Tslint will be deprecated in 2020) and `stylelint` with default linting rules. Prettier is also used.
 - Git pre-commit hook with `husky` to check syntax validity. TypeScript files are compiled and linted before commiting with `lint-staged`. Styles are also linted. Auto-fixing when possible is enabled.
 - Only one development environment is created for Webpack, it is not prepared for production, so no optimizations are being applied and source maps are present in the build.
+
+## 6. Architecture
+
+

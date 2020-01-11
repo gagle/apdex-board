@@ -3,16 +3,21 @@ const webpack = require('webpack');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
 module.exports = {
   mode: 'development',
-  entry: [path.resolve(__dirname, 'src/index.ts')],
+  entry: {
+    main: path.resolve(__dirname, 'src/index.ts'),
+    polyfills: path.resolve(__dirname, 'src/polyfills.ts')
+  },
   output: {
-    filename: 'main.js',
+    filename: '[name].js',
     path: path.resolve(__dirname, 'dist')
   },
   resolve: {
-    extensions: ['.js', '.ts', 'scss']
+    extensions: ['.js', '.ts', '.scss'],
+    plugins: [new TsconfigPathsPlugin()]
   },
   devServer: {
     hot: true,
@@ -23,7 +28,9 @@ module.exports = {
     new CleanWebpackPlugin(),
     new HtmlWebPackPlugin({
       inject: true,
-      template: path.resolve(__dirname, 'src/index.html')
+      template: path.resolve(__dirname, 'src/index.html'),
+      chunks: ['polyfills', 'main'],
+      chunksSortMode: 'manual'
     }),
     new MiniCssExtractPlugin({
       filename: 'styles.css',
@@ -39,7 +46,7 @@ module.exports = {
         exclude: /node_modules/
       },
       {
-        test: /\.s(a|c)ss$/,
+        test: /\.scss$/,
         use: [
           {
             loader: MiniCssExtractPlugin.loader,
@@ -51,7 +58,13 @@ module.exports = {
           {
             loader: 'sass-loader',
             options: {
-              sourceMap: true
+              sourceMap: true,
+              sassOptions: {
+                includePaths: [
+                  path.resolve(__dirname, 'node_modules'),
+                  path.resolve(__dirname, 'src/styles/abstracts')
+                ]
+              }
             }
           }
         ]
