@@ -8,7 +8,7 @@ const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 module.exports = {
   mode: 'development',
   entry: {
-    main: path.resolve(__dirname, 'src/index.ts'),
+    main: path.resolve(__dirname, 'src/main.ts'),
     polyfills: path.resolve(__dirname, 'src/polyfills.ts')
   },
   output: {

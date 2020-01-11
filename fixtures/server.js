@@ -10,20 +10,24 @@ const readFile = util.promisify(fs.readFile);
 const init = async () => {
   const server = hapi.server({
     port: 3100,
-    host: 'localhost'
+    host: 'localhost',
+    routes: {
+      cors: true
+    }
   });
 
   server.route({
     method: 'GET',
     path: '/',
-    handler: () => readFile(path.resolve(__dirname, 'host-app-data.json'), 'utf8')
+    handler: () =>
+      readFile(path.resolve(__dirname, 'host-app-data.json'), 'utf8')
   });
 
   await server.start();
   console.log(`Server running at ${server.info.uri}`);
 };
 
-process.on('unhandledRejection', (err) => {
+process.on('unhandledRejection', err => {
   console.error(err);
   process.exit(1);
 });

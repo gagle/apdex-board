@@ -1,19 +1,28 @@
 export abstract class ShadowDOMComponent extends HTMLElement {
-  private styleElement: HTMLStyleElement | undefined;
+  private defaultStyleElement: HTMLStyleElement;
+  private customStyleElement: HTMLStyleElement | undefined;
 
   constructor() {
     super();
+
+    this.defaultStyleElement = document.createElement('style');
+    // By default, custom elements have 'display: inline'
+    this.defaultStyleElement.innerHTML = ':host { display: block; }';
 
     this.attachShadow({ mode: 'open' });
 
     const styles = this.withStyles();
 
     if (styles) {
-      this.styleElement = document.createElement('style');
-      this.styleElement.innerHTML = styles;
+      this.customStyleElement = document.createElement('style');
+      this.customStyleElement.innerHTML = styles;
     }
 
-    this.render();
+    setTimeout(() => {
+      // Allow subclasses to finalize constructor execution by delaying onInit
+      // to the next tick
+      this.onInit();
+    }, 0);
   }
 
   withStyles(): string {
@@ -24,6 +33,8 @@ export abstract class ShadowDOMComponent extends HTMLElement {
     return '';
   }
 
+  onInit(): void {}
+
   render(): void {
     const html = this.onRender();
 
@@ -33,8 +44,14 @@ export abstract class ShadowDOMComponent extends HTMLElement {
       shadowRoot.innerHTML = html;
     }
 
-    if (this.styleElement) {
-      shadowRoot.appendChild(this.styleElement);
+    shadowRoot.appendChild(this.defaultStyleElement);
+
+    if (this.customStyleElement) {
+      shadowRoot.appendChild(this.customStyleElement);
     }
+  }
+
+  connectedCallback(): void {
+    this.render();
   }
 }
