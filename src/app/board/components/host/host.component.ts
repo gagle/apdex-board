@@ -3,7 +3,8 @@ import { Component, ShadowDOMComponent } from '@core/shadow-dom';
 
 @Component({
   selector: 'app-host',
-  styles
+  styles,
+  attributes: ['host']
 })
 export class HostComponent extends ShadowDOMComponent {
   onRender(): string {

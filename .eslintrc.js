@@ -6,5 +6,8 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 2019,
     sourceType: 'module'
+  },
+  rules: {
+    '@typescript-eslint/no-non-null-assertion': 0
   }
 };

@@ -11,9 +11,11 @@ export abstract class ShadowDOMComponent extends HTMLElement {
 
     this.attachShadow({ mode: 'open' });
 
-    if (this.styles) {
+    const styles = this.getStyles();
+
+    if (styles) {
       this.customStyleElement = document.createElement('style');
-      this.customStyleElement.innerHTML = this.styles;
+      this.customStyleElement.innerHTML = styles;
     }
 
     setTimeout(() => {
@@ -23,7 +25,7 @@ export abstract class ShadowDOMComponent extends HTMLElement {
     }, 0);
   }
 
-  get styles(): string {
+  getStyles(): string {
     return '';
   }
 
@@ -31,15 +33,16 @@ export abstract class ShadowDOMComponent extends HTMLElement {
     return '';
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   onInit(): void {}
 
   render(): void {
-    const html = this.onRender();
+    const htmlToRender = this.onRender();
 
     const shadowRoot = this.shadowRoot!;
 
-    if (html) {
-      shadowRoot.innerHTML = html;
+    if (htmlToRender) {
+      shadowRoot.innerHTML = htmlToRender;
     }
 
     shadowRoot.appendChild(this.defaultStyleElement);
