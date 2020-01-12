@@ -3,7 +3,7 @@ import { Component, ShadowDOMComponent } from '@core/shadow-dom';
 
 @Component({
   selector: 'app-view-switcher',
-  styles
+  styles: [styles]
 })
 export class ViewSwitcherComponent extends ShadowDOMComponent {
   private asList = false;
@@ -13,7 +13,12 @@ export class ViewSwitcherComponent extends ShadowDOMComponent {
   }
 
   onRender(): string {
-    return `<input type='checkbox' checked=${this.asList} /> <span>${this.asList ? 'Show as an awesome grid' : 'Show as list'}</span>`;
+    return `
+      <label class='label'>
+        ${this.asList ? 'Show as an awesome grid' : 'Show as list'}
+        <input type='checkbox' ${this.asList ? 'checked' : ''} />
+      </label>
+    `;
   }
 
   private attachEventListeners(): void {

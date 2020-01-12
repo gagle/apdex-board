@@ -1,11 +1,19 @@
 @import '../../../../styles/abstracts/variables';
 
 :host {
-  display: flex;
-  align-items: center;
+  position: relative;
+  top: -2px;
 }
 
-span {
+.label {
   font-size: $fs-tiny;
   white-space: nowrap;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  flex-direction: row-reverse;
+}
+
+input {
+  cursor: pointer;
 }

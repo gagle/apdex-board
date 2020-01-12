@@ -3,7 +3,7 @@ import { Constructor } from '@core/interfaces';
 
 export interface ComponentOptions {
   selector: string;
-  styles?: string;
+  styles?: string[];
   attributes?: string[];
 }
 
@@ -12,8 +12,8 @@ export function Component(options: ComponentOptions) {
     target: T
   ): Constructor {
     const Class = class extends target {
-      getStyles(): string {
-        return options.styles || '';
+      getStyles(): string[] {
+        return options.styles || [''];
       }
 
       static get observedAttributes(): string[] {

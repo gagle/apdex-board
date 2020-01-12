@@ -3,7 +3,7 @@ import { Component, ShadowDOMComponent } from '@core/shadow-dom';
 
 @Component({
   selector: 'app-main',
-  styles
+  styles: [styles]
 })
 export class AppComponent extends ShadowDOMComponent {
   onRender(): string {

@@ -3,7 +3,7 @@ import { Component, ShadowDOMComponent } from '@core/shadow-dom';
 
 @Component({
   selector: 'app-header',
-  styles,
+  styles: [styles],
   attributes: ['viewChange']
 })
 export class HeaderComponent extends ShadowDOMComponent {

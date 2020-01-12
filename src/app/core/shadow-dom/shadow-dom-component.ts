@@ -2,7 +2,7 @@ import { AttributeChange } from './models/attribute-change.interface';
 
 export abstract class ShadowDOMComponent extends HTMLElement {
   private defaultStyleElement: HTMLStyleElement;
-  private customStyleElement: HTMLStyleElement | undefined;
+  private customStyleElements: HTMLStyleElement[];
 
   constructor() {
     super();
@@ -15,10 +15,11 @@ export abstract class ShadowDOMComponent extends HTMLElement {
 
     const styles = this.getStyles();
 
-    if (styles) {
-      this.customStyleElement = document.createElement('style');
-      this.customStyleElement.innerHTML = styles;
-    }
+    this.customStyleElements = styles.map(style => {
+      const styleElement = document.createElement('style');
+      styleElement.innerHTML = style;
+      return styleElement;
+    });
 
     setTimeout(() => {
       // Allow subclasses to finalize constructor execution by delaying onInit
@@ -31,13 +32,16 @@ export abstract class ShadowDOMComponent extends HTMLElement {
     return this.shadowRoot!;
   }
 
-  getStyles(): string {
-    return '';
+  getStyles(): string[] {
+    return [''];
   }
 
   onRender(): string {
     return '';
   }
+
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  afterRendered(): void { }
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   onInit(): void { }
@@ -54,9 +58,11 @@ export abstract class ShadowDOMComponent extends HTMLElement {
 
     this.root.appendChild(this.defaultStyleElement);
 
-    if (this.customStyleElement) {
-      this.root.appendChild(this.customStyleElement);
-    }
+    this.customStyleElements.forEach(styleElement => {
+      this.root.appendChild(styleElement);
+    });
+
+    this.afterRendered();
   }
 
   connectedCallback(): void {

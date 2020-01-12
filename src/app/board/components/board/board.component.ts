@@ -4,7 +4,7 @@ import { HostListComponent } from '../host-list/host-list.component';
 
 @Component({
   selector: 'app-board',
-  styles
+  styles: [styles]
 })
 export class BoardComponent extends ShadowDOMComponent {
   onInit(): void {
@@ -19,7 +19,7 @@ export class BoardComponent extends ShadowDOMComponent {
   onRender(): string {
     return `
       <app-header></app-header>
-      <app-host-list></app-host-list>
+      <app-host-list asGrid></app-host-list>
     `;
   }
 }
