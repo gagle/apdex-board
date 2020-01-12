@@ -1,0 +1,13 @@
+{
+  "indent_size": 2,
+  "indent_char": " ",
+
+  "html": {
+    "wrap_line_length": 100,
+    "preserve_newlines": true,
+    "max_preserve_newlines": 1,
+    "end_with_newline": true,
+    "indent_inner_html": false,
+    "wrap_attributes": "force"
+  }
+}

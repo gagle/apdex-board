@@ -1,0 +1,11 @@
+@import '../../../../styles/abstracts/variables';
+
+:host {
+  display: flex;
+  align-items: center;
+}
+
+span {
+  font-size: $fs-tiny;
+  white-space: nowrap;
+}

@@ -1,3 +1,5 @@
+import { AttributeChange } from './models/attribute-change.interface';
+
 export abstract class ShadowDOMComponent extends HTMLElement {
   private defaultStyleElement: HTMLStyleElement;
   private customStyleElement: HTMLStyleElement | undefined;
@@ -7,7 +9,7 @@ export abstract class ShadowDOMComponent extends HTMLElement {
 
     this.defaultStyleElement = document.createElement('style');
     // By default, custom elements have 'display: inline'
-    this.defaultStyleElement.innerHTML = ':host { display: block; contain: content; }';
+    this.defaultStyleElement.innerHTML = ':host { display: block; }';
 
     this.attachShadow({ mode: 'open' });
 
@@ -25,6 +27,10 @@ export abstract class ShadowDOMComponent extends HTMLElement {
     }, 0);
   }
 
+  get root(): ShadowRoot {
+    return this.shadowRoot!;
+  }
+
   getStyles(): string {
     return '';
   }
@@ -34,25 +40,36 @@ export abstract class ShadowDOMComponent extends HTMLElement {
   }
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  onInit(): void {}
+  onInit(): void { }
+
+  // eslint-disable-next-line @typescript-eslint/no-empty-function,@typescript-eslint/no-unused-vars
+  onChange(change: AttributeChange): void { }
 
   render(): void {
     const htmlToRender = this.onRender();
 
-    const shadowRoot = this.shadowRoot!;
-
     if (htmlToRender) {
-      shadowRoot.innerHTML = htmlToRender;
+      this.root.innerHTML = htmlToRender;
     }
 
-    shadowRoot.appendChild(this.defaultStyleElement);
+    this.root.appendChild(this.defaultStyleElement);
 
     if (this.customStyleElement) {
-      shadowRoot.appendChild(this.customStyleElement);
+      this.root.appendChild(this.customStyleElement);
     }
   }
 
   connectedCallback(): void {
     this.render();
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  attributeChangedCallback(name: string, previousValue: any, currentValue: any): void {
+    const change: AttributeChange = {
+      name,
+      previousValue,
+      currentValue
+    }
+    this.onChange(change);
   }
 }

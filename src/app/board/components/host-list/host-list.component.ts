@@ -9,6 +9,15 @@ import { Host } from '@board/models/host.interface';
 })
 export class HostListComponent extends ShadowDOMComponent {
   private hosts: Host[] = [];
+  private _asGrid = true;
+
+  get asGrid(): boolean {
+    return this._asGrid;
+  }
+
+  set asGrid(value: boolean) {
+    this._asGrid = value;
+  }
 
   async onInit(): Promise<void> {
     const appsService = new AppsService();

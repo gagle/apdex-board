@@ -8,6 +8,7 @@ module.exports = {
     sourceType: 'module'
   },
   rules: {
+    quotes: [2, 'single'],
     '@typescript-eslint/no-non-null-assertion': 0
   }
 };

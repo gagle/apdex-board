@@ -1,11 +1,11 @@
-import styles from '!!raw-loader!sass-loader!./theme-switcher.component.scss';
+import styles from '!!raw-loader!sass-loader!./view-switcher.component.scss';
 import { Component, ShadowDOMComponent } from '@core/shadow-dom';
 
 @Component({
-  selector: 'app-theme-switcher',
+  selector: 'app-view-switcher',
   styles
 })
-export class ThemeSwitcherComponent extends ShadowDOMComponent {
+export class ViewSwitcherComponent extends ShadowDOMComponent {
   private asList = false;
 
   onInit(): void {
@@ -17,8 +17,15 @@ export class ThemeSwitcherComponent extends ShadowDOMComponent {
   }
 
   private attachEventListeners(): void {
-    this.shadowRoot!.querySelector('input')!.addEventListener('click', () => {
+    this.root.querySelector('input')!.addEventListener('click', () => {
       this.asList = !this.asList;
+
+      this.dispatchEvent(new CustomEvent('viewChange', {
+        detail: {
+          viewAsList: this.asList
+        }
+      }));
+
       this.render();
       this.attachEventListeners();
     });

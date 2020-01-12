@@ -18,6 +18,10 @@
 
 .title-wrapper {
   margin-right: 30px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+
 }
 
 app-theme-switcher {

@@ -53,7 +53,7 @@ npm start
 - TypeScript is used for a better development experience. Development ES version is ES2020,  and compile target for browsers is ES5.
 - SCSS is used for styles.
 - Hot Module Replacement is available for both `.ts` and `.scss` files.
-- Linting with `eslint` (new recommended way for linting TS files since Tslint will be deprecated in 2020) and `stylelint` with default linting rules.
+- Linting with `eslint` (new recommended way for linting TS files since Tslint will be deprecated in 2020) and `stylelint` with default linting rules. `js-beautify` is used to format javascript files.
 - Git pre-commit hook with `husky` to check syntax validity. TypeScript files are compiled and linted before commiting with `lint-staged`. Styles are also linted. Auto-fixing when possible is enabled.
 - Only one development environment is created for Webpack, it is not prepared for production, so no optimizations are being applied and source maps are present in the build.
 
