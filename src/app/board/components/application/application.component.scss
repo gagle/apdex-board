@@ -1,0 +1,21 @@
+@import '../../../../styles/abstracts/variables';
+
+:host {
+  display: flex;
+  flex-direction: row;
+  margin-top: 23px;
+  cursor: pointer;
+}
+
+.apdex {
+  color: rgba($color-tundora, 0.62);
+  line-height: 19px;
+  font-size: 13px;
+  font-weight: $fw-bold;
+  min-width: 40px;
+}
+
+.name {
+  color: $color-tundora;
+  line-height: 19px;
+}

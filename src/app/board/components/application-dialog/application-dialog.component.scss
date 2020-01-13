@@ -1,0 +1,23 @@
+@import '../../../../styles/abstracts/variables';
+
+:host {
+  padding: 30px;
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+.header {
+  margin-bottom: 20px;
+  font-size: $fs-big;
+  font-weight: $fw-bold;
+}
+
+.field {
+  margin-top: 16px;
+
+  &:first-child {
+    margin-top: 0;
+  }
+}

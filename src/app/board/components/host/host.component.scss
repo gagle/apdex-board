@@ -1,13 +1,13 @@
 @import '../../../../styles/abstracts/variables';
 
 :host {
-  cursor: pointer;
   padding: 30px;
   display: flex;
   flex-direction: column;
   background-color: $color-white;
   box-sizing: border-box;
   height: min-content;
+
 }
 
 .host-id {
@@ -19,25 +19,6 @@
   margin-top: 23px;
 }
 
-.app {
-  display: flex;
-  flex-direction: row;
-  margin-top: 23px;
-
-  &:first-child {
-    margin-top: 0;
-  }
-
-  &-apdex {
-    color: rgba($color-tundora, 0.62);
-    line-height: 19px;
-    font-size: 13px;
-    font-weight: $fw-bold;
-    min-width: 40px;
-  }
-
-  &-name {
-    color: $color-tundora;
-    line-height: 19px;
-  }
+app-application:first-child {
+  margin-top: 0;
 }

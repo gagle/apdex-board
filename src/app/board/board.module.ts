@@ -1,5 +1,9 @@
+import './components/application/application.component';
+import './components/application-dialog/application-dialog.component';
 import './components/board/board.component';
 import './components/header/header.component';
 import './components/host/host.component';
 import './components/host-list/host-list.component';
+import './components/text-field/text-field.component';
+import './components/text-list-field/text-list-field.component';
 import './components/view-switcher/view-switcher.component';

@@ -12,6 +12,10 @@ export function Component(options: ComponentOptions) {
     target: T
   ): Constructor {
     const Class = class extends target {
+      static get selector(): string {
+        return options.selector;
+      }
+
       getStyles(): string[] {
         return options.styles || [''];
       }

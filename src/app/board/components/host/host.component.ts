@@ -1,6 +1,7 @@
 import styles from '!!raw-loader!sass-loader!./host.component.scss';
 import { Component, ShadowDOMComponent } from '@core/shadow-dom';
 import { Host } from '@board/models/host.interface';
+import { ApplicationComponent } from '../application/application.component';
 
 @Component({
   selector: 'app-host',
@@ -24,15 +25,20 @@ export class HostComponent extends ShadowDOMComponent {
       ? `
         <span class="host-id">${this.host.id}</span>
         <div class="apps-list">
-          ${this.host.apps.slice(0, this.maxApps).reduce((str, app) => `
-            ${str}
-            <div class="app">
-              <div class="app-apdex">${app.apdex}</div>
-              <div class="app-name">${app.name}</div>
-            </div>
-          `, '')}
+          ${this.host.apps.slice(0, this.maxApps).reduce(str => `${str}<app-application></app-application>`, '')}
         </div>
       `
       : '';
+  }
+
+  afterRendered(): void {
+    this.initializeAppComponents();
+  }
+
+  private initializeAppComponents(): void {
+    const applications = this.root.querySelectorAll<ApplicationComponent>('app-application');
+    applications.forEach((application, index) => {
+      application.app = this.host.apps[index];
+    });
   }
 }

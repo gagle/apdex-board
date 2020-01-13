@@ -1,0 +1,26 @@
+@import '../../../../styles/abstracts/variables';
+
+:host {
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  font-size: $fs-small;
+  color: rgba($color-black, 0.54);
+  padding-bottom: 4px;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  li {
+    margin-top: 3px;
+
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+}
