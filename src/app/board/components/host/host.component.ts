@@ -23,7 +23,7 @@ export class HostComponent extends ShadowDOMComponent {
   onRender(): string {
     return this.host
       ? `
-        <span class="host-id">${this.host.id}</span>
+        <span class="host-id">${this.host.hostname}</span>
         <div class="apps-list">
           ${this.host.apps.slice(0, this.maxApps).reduce(str => `${str}<app-application></app-application>`, '')}
         </div>

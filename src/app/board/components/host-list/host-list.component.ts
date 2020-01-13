@@ -5,6 +5,7 @@ import { AppsApiService } from '@board/services/apps-api.service';
 import { Host } from '@board/models/host.interface';
 import { HostComponent } from '../host/host.component';
 import { HostsService } from '@board/services/hosts.service';
+import { AppsService } from '@board/services/apps.service';
 
 @Component({
   selector: 'app-host-list',
@@ -33,6 +34,8 @@ export class HostListComponent extends ShadowDOMComponent {
 
     const hostsService = new HostsService();
     this.hosts = hostsService.indexAppsByHost(apps);
+
+    console.log(new AppsService().getTopAppsByHost('e7bf58af-f0be.dallas.biz', apps))
 
     this.render();
   }

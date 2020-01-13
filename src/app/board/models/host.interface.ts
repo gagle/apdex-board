@@ -1,6 +1,6 @@
 import { App } from './app.interface';
 
 export interface Host {
-  id: string;
+  hostname: string;
   apps: App[];
 }
