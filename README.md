@@ -100,3 +100,7 @@ y = total hosts length (loop over all hosts)
 z = apps per host (sort apps per host)
 O(x + y*z)
 ```
+
+## 9. Functions to implement
+
+FUnctions `addAppToHosts`, `removeAppFromHosts` and `getTopAppsByHost` are stored in `src/app/board/services/hosts.service.ts`.
