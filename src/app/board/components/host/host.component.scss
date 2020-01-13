@@ -1,6 +1,7 @@
 @import '../../../../styles/abstracts/variables';
 
 :host {
+  cursor: pointer;
   padding: 30px;
   display: flex;
   flex-direction: column;
@@ -32,11 +33,11 @@
     line-height: 19px;
     font-size: 13px;
     font-weight: $fw-bold;
+    min-width: 40px;
   }
 
   &-name {
     color: $color-tundora;
     line-height: 19px;
-    margin-left: 23px;
   }
 }

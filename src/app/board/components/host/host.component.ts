@@ -8,6 +8,7 @@ import { Host } from '@board/models/host.interface';
 })
 export class HostComponent extends ShadowDOMComponent {
   private _host!: Host;
+  private readonly maxApps = 5;
 
   get host(): Host {
     return this._host;
@@ -21,13 +22,13 @@ export class HostComponent extends ShadowDOMComponent {
   onRender(): string {
     return this.host
       ? `
-        <span class='host-id'>${this.host.id}</span>
-        <div class='apps-list'>
-          ${this.host.apps.reduce((str, app) => `
+        <span class="host-id">${this.host.id}</span>
+        <div class="apps-list">
+          ${this.host.apps.slice(0, this.maxApps).reduce((str, app) => `
             ${str}
-            <div class='app'>
-              <div class='app-apdex'>${app.apdex}</div>
-              <div class='app-name'>${app.name}</div>
+            <div class="app">
+              <div class="app-apdex">${app.apdex}</div>
+              <div class="app-name">${app.name}</div>
             </div>
           `, '')}
         </div>

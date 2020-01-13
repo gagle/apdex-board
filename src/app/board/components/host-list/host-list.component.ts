@@ -1,9 +1,10 @@
 import stylesList from '!!raw-loader!sass-loader!./host-list.component.scss';
 import stylesGrid from '!!raw-loader!sass-loader!./host-list-grid.component.scss';
 import { Component, ShadowDOMComponent } from '@core/shadow-dom';
-import { AppsService } from '@board/services/apps.service';
+import { AppsApiService } from '@board/services/apps-api.service';
 import { Host } from '@board/models/host.interface';
 import { HostComponent } from '../host/host.component';
+import { HostsService } from '@board/services/hosts.service';
 
 @Component({
   selector: 'app-host-list',
@@ -27,71 +28,11 @@ export class HostListComponent extends ShadowDOMComponent {
   }
 
   async onInit(): Promise<void> {
-    const appsService = new AppsService();
-    const apps = await appsService.getAllApps();
-    console.log(apps);
+    const appsApiService = new AppsApiService();
+    const apps = await appsApiService.getAllApps();
 
-    this.hosts = [{
-      id: 'host1',
-      apps: [{
-        name: 'name asd asd asd asd asd asd as das das das d asdasd as das d',
-        contributors: ['contributor1', 'contributor2'],
-        version: 2,
-        apdex: 20,
-        hostIds: ['host1', 'host2']
-      }, {
-        name: 'name asd asd asd asd asd asd as das das das d asdasd as das d',
-        contributors: ['contributor1', 'contributor2'],
-        version: 2,
-        apdex: 20,
-        hostIds: ['host1', 'host2']
-      }]
-    }, {
-      id: 'host2',
-      apps: [{
-        name: 'name',
-        contributors: ['contributor1', 'contributor2'],
-        version: 2,
-        apdex: 20,
-        hostIds: ['host1', 'host2']
-      }, {
-        name: 'name',
-        contributors: ['contributor1', 'contributor2'],
-        version: 2,
-        apdex: 20,
-        hostIds: ['host1', 'host2']
-      }]
-    }, {
-      id: 'host3',
-      apps: [{
-        name: 'name',
-        contributors: ['contributor1', 'contributor2'],
-        version: 2,
-        apdex: 20,
-        hostIds: ['host1', 'host2']
-      }, {
-        name: 'name',
-        contributors: ['contributor1', 'contributor2'],
-        version: 2,
-        apdex: 20,
-        hostIds: ['host1', 'host2']
-      }]
-    }, {
-      id: 'host4',
-      apps: [{
-        name: 'name',
-        contributors: ['contributor1', 'contributor2'],
-        version: 2,
-        apdex: 20,
-        hostIds: ['host1', 'host2']
-      }, {
-        name: 'name',
-        contributors: ['contributor1', 'contributor2'],
-        version: 2,
-        apdex: 20,
-        hostIds: ['host1', 'host2']
-      }]
-    }];
+    const hostsService = new HostsService();
+    this.hosts = hostsService.indexAppsByHost(apps);
 
     this.render();
   }

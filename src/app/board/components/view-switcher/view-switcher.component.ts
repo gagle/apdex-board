@@ -14,9 +14,9 @@ export class ViewSwitcherComponent extends ShadowDOMComponent {
 
   onRender(): string {
     return `
-      <label class='label'>
+      <label class="label">
         ${this.asList ? 'Show as an awesome grid' : 'Show as list'}
-        <input type='checkbox' ${this.asList ? 'checked' : ''} />
+        <input type="checkbox" ${this.asList ? 'checked' : ''} />
       </label>
     `;
   }

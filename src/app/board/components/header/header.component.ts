@@ -20,9 +20,9 @@ export class HeaderComponent extends ShadowDOMComponent {
 
   onRender(): string {
     return `
-      <div class='title-wrapper'>
-        <span class='title'>Apps by Host </span>
-        <span class='subtitle'>for user ${this.email}</span>
+      <div class="title-wrapper">
+        <span class="title">Apps by Host </span>
+        <span class="subtitle">for user ${this.email}</span>
       </div>
       <app-view-switcher></app-view-switcher>
     `;

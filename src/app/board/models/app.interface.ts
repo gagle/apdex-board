@@ -3,5 +3,5 @@ export interface App {
   contributors: string[];
   version: number;
   apdex: number;
-  hostIds: string[];
+  host: string[];
 }
