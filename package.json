@@ -1,6 +1,7 @@
 {
   "name": "apdex-board",
   "private": true,
+  "license": "MIT",
   "scripts": {
     "build": "webpack --config webpack.config.js",
     "clean": "concurrently \"rimraf dist\" \"rimraf coverage\" \"rimraf npm-debug.log*\" \"npm cache verify\" \"npm prune\"",
