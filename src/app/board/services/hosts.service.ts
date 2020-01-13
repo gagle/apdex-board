@@ -1,26 +1,38 @@
 import { App } from '../models/app.interface';
 import { Host } from '@board/models/host.interface';
+import { HostsIndex } from '@board/models/hosts-index.interface';
 
 export class HostsService {
-  indexAppsByHost(apps: App[]): Host[] {
-    // Index hosts by id
-    const hosts = apps.reduce<Record<string, Host>>((hosts, app) => {
-      app.host.forEach(hostname => this.pushAppIntoHost(hosts, hostname, app));
-      return hosts;
+  createHostsIndex(apps: App[]): HostsIndex {
+    return apps.reduce<HostsIndex>((hostsIndex, app) => {
+      this.addAppToHosts(app, hostsIndex);
+      return hostsIndex;
     }, {});
-
-    // Sort apps based on apdex for each host
-    return Object.values(hosts).map(host => ({
-      ...host,
-      apps: host.apps.sort((a, b) => b.apdex - a.apdex)
-    }));
   }
 
-  private pushAppIntoHost(hosts: Record<string, Host>, hostname: string, app: App): void {
-    hosts[hostname] = hosts[hostname] || {
+  // Ordered push
+  addAppToHosts(app: App, hostsIndex: HostsIndex): void {
+    app.host.forEach(hostname => {
+      this.addAppByHostnameIntoHostsIndex(app, hostname, hostsIndex);
+    });
+  }
+
+  /*removeAppFromHosts(app: App, hostsIndex: HostsIndex): void {
+
+  }*/
+
+  getTopAppsByHost(hostname: string, hostsIndex: HostsIndex): App[] {
+    const host = Object.values(hostsIndex).find(host => host.hostname === hostname);
+    return host ? host.apps.slice(0, 25) : [];
+  }
+
+  private addAppByHostnameIntoHostsIndex(app: App, hostname: string, hostsIndex: HostsIndex): void {
+    hostsIndex[hostname] = hostsIndex[hostname] || {
       hostname: hostname,
       apps: []
     } as Host;
-    hosts[hostname].apps.push(app);
+    const host = hostsIndex[hostname];
+    host.apps.push(app);
+    host.apps.sort((a, b) => b.apdex - a.apdex);
   }
 }

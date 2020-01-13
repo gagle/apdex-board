@@ -88,7 +88,11 @@ The architecture has been heavily based on concepts taken from Angular. For inst
 
 Typing code is the future and so is TypeScript. It has been configured and linted as the new way starting from 2020, using `eslint` instead of `tslint`.
 
-## 7. Algorithm performance
+## 7. UI Responsive design
+
+The UI implemented follows the dimensions of the given mockups (840px width, 375px card width and 30px padding). If the window is scaled down to 840px width, then 2 hosts fit in a single row.
+
+## 8. Algorithm performance
 
 ```
 x = total apps length (loop over all apps)
