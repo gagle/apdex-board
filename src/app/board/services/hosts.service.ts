@@ -17,9 +17,15 @@ export class HostsService {
     });
   }
 
-  /*removeAppFromHosts(app: App, hostsIndex: HostsIndex): void {
-
-  }*/
+  removeAppFromHosts(app: App, hostsIndex: HostsIndex): void {
+    app.host.forEach(hostname => {
+      const apps = hostsIndex[hostname].apps;
+      const appIndex = apps.findIndex(candidateApp => candidateApp.name === app.name);
+      if (appIndex > -1) {
+        apps.splice(appIndex, 1);
+      }
+    });
+  }
 
   getTopAppsByHost(hostname: string, hostsIndex: HostsIndex): App[] {
     const host = Object.values(hostsIndex).find(host => host.hostname === hostname);

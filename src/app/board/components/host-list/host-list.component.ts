@@ -35,8 +35,6 @@ export class HostListComponent extends ShadowDOMComponent {
     const hostsIndex = hostsService.createHostsIndex(apps);
     this.hosts = Object.values(hostsIndex);
 
-    console.log(hostsService.getTopAppsByHost('e7bf58af-f0be.dallas.biz', hostsIndex))
-
     this.render();
   }
 
